@@ -4,10 +4,18 @@ import { DataContext } from "../ContextProvider.jsx";
 function StudentsList() {
   const { Arr, SetArr } = useContext(DataContext);
   const [Var, SetVar] = useState("");
+  const [Error, SetError] = useState("");
 
   function AddStudent() {
-    SetArr([...Arr, { Name: Var, Favorite: false }]);
+    const trimmedName = Var.trim();
+    if (!trimmedName) {
+      SetError("Name must not be empty");
+      return;
+    }
+
+    SetArr([...Arr, { id: Date.now(), Name: trimmedName, Favorite: false }]);
     SetVar("");
+    SetError("");
   }
 
   return (
@@ -35,6 +43,9 @@ function StudentsList() {
             Add Student
           </button>
         </div>
+        {Error ? (
+          <p className="mt-3 text-sm text-red-300">{Error}</p>
+        ) : null}
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8">
@@ -53,7 +64,7 @@ function StudentsList() {
                     key={key}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="text-slate-100 font-medium text-sm sm:text-base truncate">
+                      <div className="text-slate-100 font-semibold text-base sm:text-lg truncate">
                         {element.Name}
                       </div>
                     </div>

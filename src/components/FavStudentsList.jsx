@@ -40,9 +40,6 @@ function FavStudentsList() {
                                     key={element.id}
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="h-10 w-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600/40 to-indigo-700/40 border border-blue-500/30 text-blue-200 font-semibold text-sm">
-                                            {element.Name ? element.Name.charAt(0).toUpperCase() : "?"}
-                                        </div>
                                         <div className="text-slate-100 font-medium text-sm sm:text-base truncate">
                                             {element.Name}
                                         </div>
